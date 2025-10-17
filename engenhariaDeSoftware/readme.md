@@ -319,9 +319,294 @@ class Teste {
 
 ## :technologist: Integração Java com SQLite.
 
+<details>
+<summary><strong>📌 Classe Biblioteca  </strong></summary> 
+
+```java
+
+import java.sql.*;
+
+public class Biblioteca {
+
+    private Connection conexao;
+
+    public void conectar() {
+        try {
+            String url = "jdbc:sqlite:dbLivraria.db";
+            conexao = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println("Erro ao conectar: " + e.getMessage());
+        }
+    }
+
+    public void criarTabela() {
+        String sql = "CREATE TABLE IF NOT EXISTS biblioteca (titulo TEXT, autor TEXT, isbn TEXT PRIMARY KEY);)";
+        try (Statement stat = conexao.createStatement()) {
+            stat.execute(sql);
+        } catch (SQLException e) {
+            System.out.println("Erro ao criar tabela: " + e.getMessage());
+        }
+    }
+
+    public void addLivro(Livro livro) {
+        String sql = "INSERT INTO biblioteca (titulo, autor ,isbn) VALUES (?, ?, ?)";
+        try (PreparedStatement prepare = conexao.prepareStatement(sql)) {
+            prepare.setString(1, livro.getTitulo());
+            prepare.setString(2, livro.getAutor());
+            prepare.setString(3, livro.getIsbn());
+            prepare.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro ao criar conta: " + e.getMessage());
+        }
+    }
+
+    public Livro buscarLivroTitulo(String titulo) {
+        String sql = "SELECT * FROM biblioteca WHERE titulo = ?";
+        try (PreparedStatement prepare = conexao.prepareStatement(sql)) {
+            prepare.setString(1, titulo);
+            ResultSet rows = prepare.executeQuery();
+            if (rows.next()) {
+                return new Livro(rows.getString("titulo"), rows.getString("autor"), rows.getString("isbn"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao criar conta: " + e.getMessage());
+        }
+        return null;
+    }
+}
+
+```
+
+</details>
+
+<details>
+<summary><strong>📌 Classe Usuario  </strong></summary> 
+
+```java
+
+
+public class Usuario {
+    private String nome;
+    private String ra;
+
+    public Usuario(String nome, String ra) {
+        this.nome = nome;
+        this.ra = ra;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getRa() {
+        return ra;
+    }
+
+    public void setRa(String ra) {
+        this.ra = ra;
+    }
+}
+
+```
+
+</details>
+
+<details>
+<summary><strong>📌 Classe Livro  </strong></summary> 
+
+```java
+
+public class Livro {
+    private String titulo;
+    private String autor;
+    private String isbn;
+
+    public Livro(String titulo, String autor, String isbn) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.isbn = isbn;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getIsbn() { return  isbn; }
+
+    public void setIsbn(String isbn) { this.isbn = isbn; }
+}
+
+```
+
+</details>
+
+<details>
+<summary><strong>📌 pom.xml  </strong></summary> 
+
+```java
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>atividade_7</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>24</maven.compiler.source>
+        <maven.compiler.target>24</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.46.0.0</version>
+        </dependency>
+    </dependencies>
+
+</project>
+
+```
 
 </details>
 
 
+<details>
+<summary><strong>📌 Testes Automatizados  </strong></summary> 
+
+```java
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>atividade_7</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>24</maven.compiler.source>
+        <maven.compiler.target>24</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.46.0.0</version>
+        </dependency>
+    </dependencies>
+
+</project>
+
+```
+
+</details>
+
+</details>
 
 
+<details>
+<summary><strong> ✅ Atividade 8 </strong></summary> 
+
+## :technologist: Chat Ollama.
+
+<details>
+<summary><strong> pom.xml </strong></summary> 
+
+```java
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>ollama</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.ollama4j</groupId>
+            <artifactId>ollama4j</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <maven.compiler.source>24</maven.compiler.source>
+        <maven.compiler.target>24</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+</project>
+
+```
+
+</details>
+
+<details>
+<summary><strong> Main </strong></summary> 
+
+```java
+
+import io.github.ollama4j.OllamaAPI;
+import io.github.ollama4j.exceptions.OllamaBaseException;
+import io.github.ollama4j.models.response.OllamaResult;
+import java.io.IOException;
+
+public class Main {
+
+        public static void main(String[] args) throws OllamaBaseException, IOException, InterruptedException {
+            String host = "http://127.0.0.1:11434/";
+            String modelName = "qwen3:1.7b";
+
+            OllamaAPI ollamaAPI = new OllamaAPI(host);
+            ollamaAPI.setRequestTimeoutSeconds(60);
+            OllamaResult result =
+                    ollamaAPI.generate(modelName, "Is it possible survive without air  ?", null);
+
+            System.out.println(result.getResponse());
+        }
+    }
+
+```
+
+</details>
