@@ -137,8 +137,17 @@ O texto destaca que engenharia de software vai além de apenas escrever código:
 ![Meu diagrama UML](https://raw.githubusercontent.com/mirandajhow/Bertoti/db23b0ba130f08091e96b32f929a04053ada9958/engenhariaDeSoftware/oficinaUML.png)
 
 </details>
+
+<details>
+<summary> 📌 Diagrama UML </summary>
+
+![Meu diagrama UML](https://github.com/JhowRossii/Bertoti/blob/c643bcf8d4cdd100de4648a52b0d5c5469ae2b41/engenhariaDeSoftware/umll%20diagrama.png)
+
+</details>
 </p>
 </details>
+
+
 
 
 <details>
