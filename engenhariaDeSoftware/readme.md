@@ -62,13 +62,11 @@ Como uma organização toma decisões, com base nas lições de Tempo e Mudança
 
 ### 📄 Comentário do primeiro trecho
 
-Software engineering (engenharia de software) não é a mesma coisa que programação ou ciência da computação. Programação é só escrever código, e estudantes de ciência da computação normalmente começam a trabalhar como programadores. Já engenharia de software é mais séria: envolve usar conhecimentos teóricos para criar algo real e funcional.
+O trecho evidencia que a engenharia de software se diferencia das demais áreas da engenharia por lidar com algo intangível e variável. Enquanto engenharias como a mecânica ou a civil produzem objetos físicos — como carros, pontes ou edifícios — que funcionam da mesma forma em qualquer lugar do mundo, o software não possui essa estabilidade.
 
-Assim como engenheiros civis, mecânicos ou aeronáuticos usam a teoria para construir coisas concretas, engenheiros de software também criam algo real, mesmo que seja mais “intangível”.
+Um carro, por exemplo, é o mesmo no Brasil ou na China: suas peças e funcionamento seguem padrões previsíveis. Já um software pode apresentar comportamentos diferentes para cada usuário, pois depende de fatores como qualidade da conexão, desempenho do dispositivo, sistema operacional e quantidade de acessos simultâneos.
 
-O problema é que, diferente dessas outras engenharias, a engenharia de software ainda não tem práticas tão rígidas e rigorosas. Por exemplo, engenheiros aeronáuticos precisam seguir regras muito estritas porque qualquer erro pode ser grave. Na programação, isso nem sempre aconteceu.
-
-Mas como o software está cada vez mais presente na nossa vida, é necessário ter métodos mais confiáveis e rigorosos. Esse livro do Google mostra um caminho para práticas de software mais seguras e eficientes, trazendo uma perspectiva nova que ajuda a complementar o que já existe sobre engenharia de software nos últimos 50 anos.
+Essa natureza intangível e mutável faz com que o desenvolvimento de software seja um processo muito mais complexo e dinâmico, exigindo métodos de engenharia que considerem variações e incertezas. Assim, a engenharia de software precisa adotar práticas mais rigorosas e científicas, semelhantes às das engenharias tradicionais, para garantir confiabilidade e eficiência, mesmo diante da imprevisibilidade dos ambientes digitais.
 
 </details>
 
