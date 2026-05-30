@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Café · Manager</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- Grain overlay -->
+  <div class="grain"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">☕</div>
+      <span class="logo-text">Café<br><em>Manager</em></span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-btn active" data-view="list" onclick="App.showView('list')">
+        <span class="nav-icon">◈</span>
+        <span>Catálogo</span>
+      </button>
+      <button class="nav-btn" data-view="add" onclick="App.showView('add')">
+        <span class="nav-icon">+</span>
+        <span>Novo Café</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="api-indicator">
+        <span class="dot" id="apiDot"></span>
+        <span id="apiStatus">Conectando...</span>
+      </div>
+      <div class="api-url-label">API</div>
+      <input class="api-url-input" id="apiUrl" type="text" value="http://localhost:8080" placeholder="http://localhost:8080" oninput="App.updateBaseUrl(this.value)" />
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Header -->
+    <header class="topbar">
+      <div class="topbar-title" id="viewTitle">Catálogo de Cafés</div>
+      <div class="topbar-actions">
+        <button class="btn-icon" onclick="App.loadCoffees()" title="Atualizar">↻</button>
+      </div>
+    </header>
+
+    <!-- Toast -->
+    <div class="toast-area" id="toastArea"></div>
+
+    <!-- VIEW: LIST -->
+    <section class="view active" id="view-list">
+      <div class="section-header">
+        <p class="section-sub">Gerencie todos os cafés cadastrados</p>
+        <div class="search-wrap">
+          <input type="text" class="search-input" id="searchInput" placeholder="Buscar café..." oninput="App.filterCoffees(this.value)" />
+          <span class="search-icon">⌕</span>
+        </div>
+      </div>
+
+      <div class="coffee-grid" id="coffeeGrid">
+        <!-- Cards gerados via JS -->
+      </div>
+
+      <div class="empty-state hidden" id="emptyState">
+        <div class="empty-icon">☕</div>
+        <p>Nenhum café encontrado</p>
+      </div>
+    </section>
+
+    <!-- VIEW: ADD -->
+    <section class="view" id="view-add">
+      <div class="form-card">
+        <h2 class="form-title">Adicionar Café</h2>
+        <p class="form-sub">Cadastre um novo café no catálogo</p>
+
+        <div class="field-group">
+          <label class="field-label">ID <span class="field-hint">(opcional — gerado automaticamente se vazio)</span></label>
+          <input type="text" class="field-input" id="addId" placeholder="Ex: abc-123-uuid" />
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Nome do Café <span class="required">*</span></label>
+          <input type="text" class="field-input" id="addName" placeholder="Ex: Café Etiópia Natural" />
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-secondary" onclick="App.clearAddForm()">Limpar</button>
+          <button class="btn-primary" onclick="App.addCoffee()">Adicionar Café</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: EDIT (modal overlay) -->
+    <div class="modal-overlay hidden" id="editModal">
+      <div class="modal">
+        <button class="modal-close" onclick="App.closeEdit()">×</button>
+        <h2 class="form-title">Editar Café</h2>
+        <p class="form-sub" id="editSubtitle">Atualizando registro</p>
+
+        <div class="field-group">
+          <label class="field-label">ID</label>
+          <input type="text" class="field-input disabled" id="editId" readonly />
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Nome do Café <span class="required">*</span></label>
+          <input type="text" class="field-input" id="editName" placeholder="Nome do café" />
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-secondary" onclick="App.closeEdit()">Cancelar</button>
+          <button class="btn-primary" onclick="App.saveCoffee()">Salvar Alterações</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: CONFIRM DELETE -->
+    <div class="modal-overlay hidden" id="deleteModal">
+      <div class="modal modal-sm">
+        <h2 class="form-title">Remover Café</h2>
+        <p class="delete-msg">Tem certeza que deseja remover <strong id="deleteName"></strong>?</p>
+        <div class="form-actions">
+          <button class="btn-secondary" onclick="App.closeDelete()">Cancelar</button>
+          <button class="btn-danger" onclick="App.confirmDelete()">Remover</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+
+</html>
